@@ -16,6 +16,7 @@ let snxJSConnector = {
       provider,
       networkId: provider.network.chainId,
     });
+    this.synths = this.snxJS.contractSettings.synths;
   },
 };
 module.exports = snxJSConnector;

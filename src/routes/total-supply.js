@@ -6,10 +6,10 @@ const getTotalSupply = async (req, res) => {
   } = synthetixJs;
   try {
     const totalSupply = await Synthetix.totalSupply();
-    res.send({ totalSupply: totalSupply / 1e18 });
+    return res.send({ totalSupply: totalSupply / 1e18 });
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 };
 
