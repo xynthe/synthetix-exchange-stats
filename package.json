@@ -1,0 +1,21 @@
+{
+  "name": "synthetix-data-api",
+  "version": "1.0.0",
+  "description": "Synthetix API endpoints",
+  "author": "Clement Balestrat",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "watch": "nodemon src/app.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ethers": "^4.0.47",
+    "express": "^4.17.1",
+    "synthetix-js": "^2.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
