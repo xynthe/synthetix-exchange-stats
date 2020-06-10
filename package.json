@@ -8,7 +8,8 @@
 		"start": "node src/app.js",
 		"watch": "nodemon src/app.js",
 		"lint": "eslint .",
-		"lint:fix": "eslint --fix './src/**/*.js'"
+		"lint:fix": "eslint --fix './src/**/*.js'",
+		"format": "prettier --write '**/*.js'"
 	},
 	"license": "MIT",
 	"dependencies": {
@@ -20,8 +21,9 @@
 		"synthetix-js": "^2.22.4"
 	},
 	"devDependencies": {
-		"eslint": "^6.8.0",
+		"eslint": "7.2.0",
 		"eslint-config-airbnb-base": "^14.1.0",
+		"eslint-config-prettier": "6.11.0",
 		"eslint-plugin-import": "^2.21.2",
 		"eslint-plugin-prettier": "^3.1.3",
 		"nodemon": "^2.0.4",

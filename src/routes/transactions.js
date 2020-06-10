@@ -20,11 +20,11 @@ const transactions = async (req, res) => {
 
 	const pairTransactions = exchanges
 		.filter(
-			(exchange) =>
+			exchange =>
 				[from.name, to.name].includes(exchange.fromCurrencyKey) ||
 				[from.name, to.name].includes(exchange.toCurrencyKey),
 		)
-		.map((exchange) => {
+		.map(exchange => {
 			const transactionType = exchange.fromCurrencyKey === from.name ? SELL_TRANSACTION : BUY_TRANSACTION;
 			return {
 				type: transactionType,

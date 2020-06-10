@@ -1,13 +1,6 @@
 const synthetixJs = require('../utils/snxJS-connector');
 
-const VALID_SYNTHS_CATEGORIES = [
-	'all',
-	'crypto',
-	'forex',
-	'commodity',
-	'index',
-	'equities',
-];
+const VALID_SYNTHS_CATEGORIES = ['all', 'crypto', 'forex', 'commodity', 'index', 'equities'];
 const getPairs = async (req, res) => {
 	const { synths } = synthetixJs;
 	const { category } = req.params;
@@ -16,10 +9,7 @@ const getPairs = async (req, res) => {
 		return res.status(500).json(`${category} is not a valid synth category`);
 	}
 
-	const synthsList = (category === 'all'
-		? synths
-		: synths.filter(s => s.category === category)
-	).map(s => s.name);
+	const synthsList = (category === 'all' ? synths : synths.filter(s => s.category === category)).map(s => s.name);
 
 	if (category !== 'forex') {
 		synthsList.push('sUSD');
