@@ -7,7 +7,7 @@ const getTicker = require('./ticker');
 const router = express.Router();
 
 router.get('/alive', (req, res) => {
-  res.send('API is live');
+	res.send('API is live');
 });
 
 router.get('/api/total-supply', getTotalSupply);

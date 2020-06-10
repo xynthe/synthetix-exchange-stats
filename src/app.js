@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const snxJSConnector = require('./utils/snxJS-connector');
 
 snxJSConnector.init();

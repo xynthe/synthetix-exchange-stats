@@ -1,46 +1,46 @@
 const synthetixJs = require('../utils/snxJS-connector');
 
 const VALID_SYNTHS_CATEGORIES = [
-  'all',
-  'crypto',
-  'forex',
-  'commodity',
-  'index',
-  'equities',
+	'all',
+	'crypto',
+	'forex',
+	'commodity',
+	'index',
+	'equities',
 ];
 const getPairs = async (req, res) => {
-  const { synths } = synthetixJs;
-  const { category } = req.params;
+	const { synths } = synthetixJs;
+	const { category } = req.params;
 
-  if (!VALID_SYNTHS_CATEGORIES.includes(category)) {
-    return res.status(500).json(`${category} is not a valid synth category`);
-  }
+	if (!VALID_SYNTHS_CATEGORIES.includes(category)) {
+		return res.status(500).json(`${category} is not a valid synth category`);
+	}
 
-  let synthsList = (category === 'all'
-    ? synths
-    : synths.filter(s => s.category === category)
-  ).map(s => s.name);
+	const synthsList = (category === 'all'
+		? synths
+		: synths.filter(s => s.category === category)
+	).map(s => s.name);
 
-  if (category !== 'forex') {
-    synthsList.push('sUSD');
-  }
+	if (category !== 'forex') {
+		synthsList.push('sUSD');
+	}
 
-  let pairs = [];
-  for (let i = 0; i < synthsList.length; i++) {
-    for (let j = i + 1; j < synthsList.length; j++) {
-      pairs.push(`${synthsList[i]}-${synthsList[j]}`);
-    }
-  }
+	let pairs = [];
+	for (let i = 0; i < synthsList.length; i++) {
+		for (let j = i + 1; j < synthsList.length; j++) {
+			pairs.push(`${synthsList[i]}-${synthsList[j]}`);
+		}
+	}
 
-  pairs = pairs.map(pair => {
-    ['sETH', 'sBTC', 'sUSD'].forEach(s => {
-      if (pair.startsWith(s)) {
-        pair = pair.split('-').reverse().join('-');
-      }
-    });
-    return pair;
-  });
-  return res.send(pairs);
+	pairs = pairs.map(pair => {
+		['sETH', 'sBTC', 'sUSD'].forEach(s => {
+			if (pair.startsWith(s)) {
+				pair = pair.split('-').reverse().join('-');
+			}
+		});
+		return pair;
+	});
+	return res.send(pairs);
 };
 
 module.exports = getPairs;
