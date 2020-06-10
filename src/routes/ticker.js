@@ -10,10 +10,7 @@ const ticker = async (req, res) => {
 	if (!pair) return res.status(500).json('Pair is missing in the params');
 
 	const currencies = getCurrenciesFromPair(pair);
-	if (!currencies)
-		return res
-			.status(500)
-			.json(`Could not find currencies from the pair ${pair}`);
+	if (!currencies) return res.status(500).json(`Could not find currencies from the pair ${pair}`);
 
 	const { from, to } = currencies;
 	if (cache.get(`ticker:${from.name}-${to.name}`)) {
@@ -38,10 +35,8 @@ const ticker = async (req, res) => {
 
 		const pairExchangeHistory = exchangeHistory.filter(
 			exchange =>
-				(exchange.fromCurrencyKey === from.name &&
-          exchange.toCurrencyKey === to.name) ||
-        (exchange.fromCurrencyKey === to.name &&
-          exchange.toCurrencyKey === from.name)
+				(exchange.fromCurrencyKey === from.name && exchange.toCurrencyKey === to.name) ||
+				(exchange.fromCurrencyKey === to.name && exchange.toCurrencyKey === from.name),
 		);
 
 		const volumeDefault = {
@@ -69,17 +64,11 @@ const ticker = async (req, res) => {
 			currentKey.lowFrom = !currentKey.lowFrom
 				? rateFrom
 				: currentKey.lowFrom > rateFrom
-					? rateFrom
-					: currentKey.lowFrom;
-			currentKey.lowTo = !currentKey.lowTo
-				? rateTo
-				: currentKey.lowTo > rateTo
-					? rateTo
-					: currentKey.lowTo;
-			currentKey.highFrom =
-        currentKey.highFrom < rateFrom ? rateFrom : currentKey.highFrom;
-			currentKey.highTo =
-        currentKey.highTo < rateTo ? rateTo : currentKey.highTo;
+				? rateFrom
+				: currentKey.lowFrom;
+			currentKey.lowTo = !currentKey.lowTo ? rateTo : currentKey.lowTo > rateTo ? rateTo : currentKey.lowTo;
+			currentKey.highFrom = currentKey.highFrom < rateFrom ? rateFrom : currentKey.highFrom;
+			currentKey.highTo = currentKey.highTo < rateTo ? rateTo : currentKey.highTo;
 		});
 
 		const rate = fromRate / 1e18 / (toRate / 1e18);
@@ -92,10 +81,7 @@ const ticker = async (req, res) => {
 			volume24hFrom: volumes[from.name].totalFrom + volumes[to.name].totalTo,
 			volume24hTo: volumes[from.name].totalTo + volumes[to.name].totalFrom,
 			low24hRate: Math.min(volumes[from.name].lowTo, volumes[to.name].lowFrom),
-			high24hRate: Math.max(
-				volumes[from.name].highTo,
-				volumes[to.name].highFrom
-			),
+			high24hRate: Math.max(volumes[from.name].highTo, volumes[to.name].highFrom),
 		};
 		cache.put(`ticker:${from.name}-${to.name}`, ticker, CACHE_LIMIT);
 		return res.send(ticker);
