@@ -1,5 +1,5 @@
 {
-	"name": "synthetix-data-api",
+	"name": "synthetix-exchange-stats",
 	"version": "1.0.0",
 	"description": "Synthetix API endpoints",
 	"author": "Clement Balestrat",
