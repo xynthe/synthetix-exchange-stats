@@ -61,11 +61,10 @@ const ticker = async (req, res) => {
 
 			currentKey.totalFrom += fromAmount;
 			currentKey.totalTo += toAmount;
-			currentKey.lowFrom = !currentKey.lowFrom
-				? rateFrom
-				: currentKey.lowFrom > rateFrom
-				? rateFrom
-				: currentKey.lowFrom;
+
+			if (!currentKey.lowFrom || currentKey.lowFrom > rateFrom) {
+				currentKey.lowFrom = rateFrom;
+			}
 			currentKey.lowTo = !currentKey.lowTo ? rateTo : currentKey.lowTo > rateTo ? rateTo : currentKey.lowTo;
 			currentKey.highFrom = currentKey.highFrom < rateFrom ? rateFrom : currentKey.highFrom;
 			currentKey.highTo = currentKey.highTo < rateTo ? rateTo : currentKey.highTo;
