@@ -18,7 +18,7 @@
 		"express": "^4.17.1",
 		"memory-cache": "^0.2.0",
 		"synthetix-data": "^2.1.13",
-		"synthetix-js": "2.26.2"
+		"synthetix-js": "2.26.3"
 	},
 	"devDependencies": {
 		"eslint": "7.2.0",
