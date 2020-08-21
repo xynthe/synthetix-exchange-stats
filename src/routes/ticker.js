@@ -3,7 +3,7 @@ const cache = require('memory-cache');
 const synthetixJs = require('../utils/snxJS-connector');
 const { getCurrenciesFromPair } = require('../utils/currency');
 
-const CACHE_LIMIT = 1000 * 60; // 1 minute
+const CACHE_LIMIT = 3 * 1000 * 60; // 3 minute
 
 const ticker = async (req, res) => {
 	const { pair } = req.params;
