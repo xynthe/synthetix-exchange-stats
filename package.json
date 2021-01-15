@@ -1,6 +1,6 @@
 {
 	"name": "synthetix-exchange-stats",
-	"version": "2.36.0",
+	"version": "2.36.1",
 	"description": "Exchange stats API endpoints",
 	"author": "Clement Balestrat",
 	"main": "app.js",
